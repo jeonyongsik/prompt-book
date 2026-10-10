@@ -1,0 +1,276 @@
+<title>함양군의회 프롬프트 북</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one narrow phone column — reference-style panel up top, sticky tier/module filters, stacked prompt cards with copy buttons. Single deliberate dark look. */
+:root {
+  --bg: #0E100F;
+  --panel: #151716;
+  --row: #1C1F1E;
+  --line: #2C302E;
+  --line-strong: #4A4E4C;
+  --fg: #EEF0EE;
+  --muted: #9A9F9C;
+  --neon: #3DDC6A;
+  --neon-ink: #0B140E;
+  --glow-fill: #0F1C13;
+  --amber: #E8A33D;
+  --red: #EF4444;
+  --font-display: "IBM Plex Sans KR", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --radius: 14px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  padding-inline: 16px;
+  padding-block: 0 48px;
+}
+.wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+a { color: var(--neon); }
+:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+
+/* header */
+header { padding-top: 28px; display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: 13px; letter-spacing: .04em; color: var(--neon); font-weight: 700; margin: 0; }
+h1 { font-family: var(--font-display); font-size: clamp(30px, 8vw, 40px); line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lead { color: var(--muted); margin: 0; font-size: 15px; }
+
+/* reference panel */
+.panel { background: var(--panel); border: 1px solid var(--line-strong); border-radius: 18px; padding: 18px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.panel h2 { font-family: var(--font-display); font-weight: 500; font-size: 19px; text-align: center; margin: 0 0 4px; }
+.step { background: var(--row); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; color: var(--muted); font-size: 15px; display: flex; gap: 10px; align-items: baseline; }
+.step b { color: var(--fg); font-weight: 500; font-variant-numeric: tabular-nums; }
+.step .ph { color: var(--amber); font-weight: 700; }
+.glowbox { border: 1.5px solid var(--neon); border-radius: 12px; background: var(--glow-fill); box-shadow: 0 0 18px rgba(61,220,106,.22), inset 0 0 12px rgba(61,220,106,.08); padding: 14px 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.glowbox svg { width: 100%; height: 72px; display: block; }
+.glowbox path { fill: none; stroke: var(--neon); stroke-width: 3.5; stroke-linecap: round; filter: drop-shadow(0 0 5px rgba(61,220,106,.7)); }
+.glowbox .lab { color: var(--neon); font-weight: 700; font-size: 18px; font-family: var(--font-display); }
+
+/* sticky filters */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; margin-inline: -16px; padding-inline: 16px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+.tiers button { appearance: none; border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 15px; padding: 9px 4px; border-radius: 9px; cursor: pointer; display: flex; flex-direction: column; align-items: center; line-height: 1.2; gap: 2px; min-height: 48px; }
+.tiers button small { font-weight: 500; font-size: 11.5px; font-variant-numeric: tabular-nums; opacity: .85; }
+.tiers button[aria-pressed="true"] { background: var(--row); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.tiers button[data-t="기초"][aria-pressed="true"] { color: var(--neon); box-shadow: inset 0 0 0 1.5px var(--neon); }
+.tiers button[data-t="중급"][aria-pressed="true"] { color: var(--amber); box-shadow: inset 0 0 0 1.5px var(--amber); }
+.tiers button[data-t="심화"][aria-pressed="true"] { color: var(--red); box-shadow: inset 0 0 0 1.5px var(--red); }
+.mods { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-inline: -16px; padding-inline: 16px; }
+.mods::-webkit-scrollbar { display: none; }
+.mods button { flex: none; appearance: none; font: inherit; font-size: 14px; color: var(--muted); background: var(--row); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+.mods button[aria-pressed="true"] { color: var(--neon-ink); background: var(--neon); border-color: var(--neon); font-weight: 700; }
+.search { display: flex; }
+.search input { width: 100%; font: inherit; font-size: 15px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
+.search input::placeholder { color: var(--muted); }
+
+.count { color: var(--muted); font-size: 14px; margin: 0; }
+
+/* cards */
+.list { display: flex; flex-direction: column; gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; transition: border-color .2s, box-shadow .2s; }
+.card.copied { border-color: var(--neon); box-shadow: 0 0 16px rgba(61,220,106,.25); }
+.meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.pill { font-weight: 700; font-size: 12.5px; padding: 2px 9px; border-radius: 999px; color: var(--neon-ink); }
+.pill.기초 { background: var(--neon); }
+.pill.중급 { background: var(--amber); }
+.pill.심화 { background: var(--red); color: #fff; }
+.card h3 { font-family: var(--font-display); font-size: 18.5px; line-height: 1.35; margin: 0; text-wrap: balance; }
+.when { margin: 0; font-size: 14.5px; color: var(--muted); }
+.prompt { margin: 0; white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhere; font-family: var(--font-body); font-size: 15px; line-height: 1.7; background: var(--row); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; color: var(--fg); user-select: text; -webkit-user-select: text; }
+.prompt .ph { color: var(--amber); font-weight: 700; }
+.prompt .lb { color: var(--neon); font-weight: 700; }
+.actions { display: flex; gap: 10px; align-items: center; }
+.copy { appearance: none; font: inherit; font-weight: 700; font-size: 15.5px; border-radius: 10px; padding: 11px 18px; min-height: 46px; cursor: pointer; border: 1.5px solid var(--neon); background: transparent; color: var(--neon); flex: 1; }
+.copy:active { transform: translateY(1px); }
+.card.copied .copy { background: var(--neon); color: var(--neon-ink); }
+.hint { font-size: 13px; color: var(--amber); margin: 0; }
+details { border-top: 1px solid var(--line); padding-top: 8px; }
+summary { cursor: pointer; color: var(--muted); font-size: 14px; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+ "; color: var(--neon); font-weight: 700; }
+details[open] summary::before { content: "− "; }
+.ex { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; font-size: 14.5px; }
+.ex h4 { margin: 0; font-size: 13.5px; color: var(--neon); }
+.ex ul { margin: 0; padding-left: 18px; }
+.ex .warn { color: var(--fg); background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.45); border-radius: 8px; padding: 8px 10px; margin: 0; }
+.ex .warn b { color: var(--red); }
+
+.empty { color: var(--muted); text-align: center; padding: 24px 0; }
+
+/* footer */
+footer { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+footer h2 { font-family: var(--font-display); font-size: 17px; margin: 0; }
+.redlines { display: grid; gap: 8px; }
+.red { background: var(--panel); border: 1px solid rgba(239,68,68,.45); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; }
+.red b { color: var(--red); margin-right: 6px; }
+.sites { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 14.5px; }
+.sites span { color: var(--muted); }
+.fine { color: var(--muted); font-size: 13px; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">함양군의회 의정연수 · 배포용</p>
+    <h1>프롬프트 북</h1>
+    <p class="lead">생성형 AI 의정활동 프롬프트 35개 · 기초 · 중급 · 심화</p>
+  </header>
+
+  <section class="panel" aria-label="쓰는 순서">
+    <h2>이렇게 쓰세요</h2>
+    <div class="step"><b>1</b><span>단계와 모듈을 고르세요</span></div>
+    <div class="step"><b>2</b><span>복사 버튼을 누르세요</span></div>
+    <div class="step"><b>3</b><span>AI 앱에 붙여 넣고 <span class="ph">[대괄호]</span>만 바꾸세요</span></div>
+    <div class="glowbox">
+      <svg viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><path d="M6 62 C 60 62, 80 10, 135 10 S 205 40, 240 38 S 280 28, 294 24"/></svg>
+      <span class="lab">막막함 → 초안</span>
+    </div>
+  </section>
+
+  <div class="filters">
+    <div class="tiers" role="group" aria-label="단계">
+      <button type="button" data-t="전체" id="t-all">전체<small></small></button>
+      <button type="button" data-t="기초" id="t-basic">기초<small></small></button>
+      <button type="button" data-t="중급" id="t-mid">중급<small></small></button>
+      <button type="button" data-t="심화" id="t-adv">심화<small></small></button>
+    </div>
+    <div class="mods" role="group" aria-label="모듈" id="mods"></div>
+    <label class="search"><input id="q" type="search" placeholder="검색 — 예: 조례, 민원, 지방재정365" aria-label="프롬프트 검색"></label>
+  </div>
+
+  <p class="count" id="count" aria-live="polite"></p>
+  <main class="list" id="list"></main>
+
+  <footer>
+    <h2>입력 전 꼭 지킬 3가지</h2>
+    <div class="redlines">
+      <div class="red"><b>개인정보</b>실명 · 연락처 · 주소는 지우고 '민원인 A'로</div>
+      <div class="red"><b>미공개 자료</b>내부 문서 · 미공개 공문은 올리지 않기</div>
+      <div class="red"><b>맹신 금지</b>조문 · 숫자는 원문과 대조한 뒤 사용</div>
+    </div>
+    <h2>확인할 곳</h2>
+    <div class="sites">
+      <span>법령</span><a href="https://www.law.go.kr" target="_blank" rel="noopener">law.go.kr</a>
+      <span>조례</span><a href="https://www.elis.go.kr" target="_blank" rel="noopener">elis.go.kr</a>
+      <span>판례</span><a href="https://glaw.scourt.go.kr" target="_blank" rel="noopener">glaw.scourt.go.kr</a>
+      <span>지방재정</span><a href="https://lofin365.go.kr" target="_blank" rel="noopener">lofin365.go.kr</a>
+    </div>
+    <p class="fine">프롬프트 속 사업명 · 수치는 실습용 예시입니다. 함양군의회 의정연수 「생성형 AI를 활용하는 지방의회 의정활동」 1부 · 2부 · 전용식</p>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"m": "5분발언", "t": "기초", "title": "말하듯 요청하기", "when": "AI를 처음 쓸 때, 주제만 정해졌을 때", "text": "나는 [함양군의회] 의원이야. 이번 임시회에서 [어르신 병원 이동 지원]에 대해 5분 자유발언을 하려고 해.\n군수님이 바로 행동하도록 설득하는 발언문을 써 줘. 천천히 읽어서 5분(공백 포함 1,700~2,000자) 분량으로, 어려운 말 없이 써 줘.", "ex": {"follow": ["\"첫 문단을 어르신 한 분의 사연으로 시작해 줘\"", "\"군에 요구하는 내용을 세 가지로 정리해 줘\"", "\"1,800자로 줄이고, 마지막 문장을 더 힘 있게 바꿔 줘\""]}, "id": "p01"}, {"m": "5분발언", "t": "중급", "title": "5요소 발언문", "when": "구조와 분량을 안정적으로 맞추고 싶을 때", "text": "Role: 공공 스피치 전문 의회 수석 전문위원\nContext: [함양군]의 현안인 [영유아 인구 감소와 보육 기반 약화]에 관하여 단체장에게 대안을 촉구\nTask: 도입 – 현황 – 문제점 – 대안 – 결론 5단계에 맞춘 구어체 대본 작성\nFormat: 5분 낭독에 맞춘 공백 포함 1,700~2,000자\nConstraint: 정쟁성 공격 표현 배제, 감정적 호소와 논리적 데이터의 균형, 가상 데이터 생성 금지 (통계 자리는 [확인 필요]로 비워 둘 것)", "ex": {}, "id": "p02"}, {"m": "5분발언", "t": "심화", "title": "문체 학습(Few-Shot) 발언문", "when": "내 말투 그대로 초안을 받고 싶을 때", "text": "Role: 10년 차 정책지원관이자 스피치라이터\nTask: 아래 첨부한 [나의 기존 5분 자유발언문 2편]의 어조, 자주 쓰는 단어, 문장 호흡을 분석하고 학습할 것.\n학습이 끝나면 [첨부한 함양군 보육 예산 자료]를 근거로 [야간 돌봄 센터 확충]을 촉구하는 새 5분 발언문 초안을 작성할 것.\nFormat: 도입부에 관련 명언 인용, 본론에 예산 문제를 수치로 제시, 결론에 조례 개정 의지 표명.\nConstraint: 첨부 자료에 없는 수치는 쓰지 말 것.", "ex": {}, "id": "p03"}, {"m": "5분발언", "t": "심화", "title": "근거 첨부 · 자기검증 3단계", "when": "통계가 들어가는 중요한 발언일 때 — 같은 대화창에서 3번 이어서 입력", "text": "Step 1: 첨부한 [내 과거 5분발언 2편]의 말투, 자주 쓰는 표현, 문장 길이를 5줄로 요약해 줘. 아직 새 글은 쓰지 마.\nStep 2: 첨부한 [함양군 인구 통계 · 재정지표 자료] 안의 수치만 사용해서, 위 말투로 [청년 정착 주거 지원] 촉구 5분발언 초안(공백 포함 1,700~2,000자)을 써 줘. 자료에 없는 수치는 지어내지 말고 [확인 필요]로 남겨.\nStep 3: 방금 쓴 초안의 모든 숫자를 \"문장 / 수치 / 첨부 자료 속 위치 / 확인 여부\" 표로 정리해 줘. 첨부 자료에서 찾을 수 없는 숫자는 [확인 필요]로 표시해.\nConstraint: 정쟁성 표현 · 특정인 비방 금지, 개인정보 미포함.", "ex": {}, "id": "p04"}, {"m": "보도자료", "t": "기초", "title": "메모를 기사로 바꾸기", "when": "의정활동 메모만 있을 때", "text": "아래 메모를 지역 신문에 보낼 보도자료로 바꿔 줘. 제목 3개와 본문 400자로.\n\n[메모] 10월 ○일 함양군의회 ○○○ 의원, 「함양군 고령운전자 교통안전 조례」 대표 발의. 만 70세 이상 면허 반납 시 지역상품권 지급(금액은 확정 후 기재). ○○○ 의원: \"어르신 이동권과 안전을 함께 지키겠다\"", "ex": {"check": ["날짜 · 이름 · 숫자는 메모에 있는 것만 쓰게 하기", "결과물의 숫자는 메모와 한 번 더 대조하기", "의원 소감보다 주민에게 달라지는 점을 앞에"], "checkLabel": "기초에서 꼭 지킬 3가지"}, "id": "p05"}, {"m": "보도자료", "t": "중급", "title": "헤드라인 3안 + 단신", "when": "조례 통과 등 확정된 소식을 알릴 때", "text": "Role: [함양군] 지역 언론을 담당하는 10년 차 전문 공보관\nContext: 우리 의원실의 [○○○] 의원이 [고령운전자 교통안전 조례]를 대표 발의하여 본회의를 통과했습니다.\nTask: 조례 통과 소식을 주민에게 알리는 보도자료 초안을 작성해 주세요.\nFormat: 1) 헤드라인 3안 (스트레이트형 · 정책강조형 · 감성/공감형 각 1개)  2) 본문 300자 내외 단신 — 핵심 내용 [만 70세 이상 면허 반납 시 지역상품권 지급]과 의원 코멘트 포함\nConstraint: 객관적이고 건조한 기사 톤, 과장 없이 육하원칙에 맞게.", "ex": {"warn": "AI가 소속 정당이나 세부 수치를 임의로 지어낼 수 있습니다. 배포 전 숫자와 이름을 직접 확인하세요."}, "id": "p06"}, {"m": "보도자료", "t": "심화", "title": "원고 하나, 매체 넷", "when": "확정된 보도자료를 SNS · 카드뉴스 · 소식지로 함께 내보낼 때", "text": "Role: 의회 홍보를 10년째 맡아 온 편집자\nContext: 아래 [확정 보도자료 원문]은 사실 확인이 끝난 문서입니다.\nTask: 원문을 지역 신문 · 의회 SNS · 카드뉴스(5장) · 의정소식지 칼럼 4가지로 변환해 줘.\nFormat: 매체별로 제목을 달아 구분하고, 아래 표의 분량과 말투를 지킬 것.\nConstraint: 원문에 없는 사실 · 숫자 · 인용을 추가하지 말 것. 선거운동으로 오해될 표현(지지 호소, 업적 과장) 금지.", "ex": {}, "id": "p07"}, {"m": "조례", "t": "기초", "title": "아이디어를 조례 뼈대로", "when": "조례 아이디어만 있을 때 — 결과물은 \"초안의 초안\"", "text": "[함양군]에 [빈집을 청년 창업 공간으로 활용하는] 조례를 만들고 싶어. 조례에 보통 들어가는 조항 순서대로 뼈대(조 제목과 한 줄 설명)만 만들어 줘.\n법 조문 번호는 쓰지 말고, 근거 법령이 필요한 곳은 [근거 법령 확인 필요]라고 표시해 줘.", "ex": {"check": ["AI가 쓴 조문 번호를 그대로 쓰기", "벌칙 · 과태료 조항을 바로 넣기", "'다른 군에 이미 있다'는 말을 확인 없이 믿기"], "checkLabel": "기초 단계에서 하지 말 것"}, "id": "p08"}, {"m": "조례", "t": "중급", "title": "조례안 종합 법리 검토", "when": "초안이 나온 뒤 3대 점검 요소로 검토할 때", "text": "Role: 자치입법을 전문으로 다루는 변호사이자 의회 수석 전문위원\nContext: [함양군의회]에서 새로 발의할 [농어촌 빈집 정비 및 활용에 관한 조례안] 초안을 검토 중입니다. [조례안 주요 내용 또는 조문 전체 붙여 넣기]\nTask: 자치입법 3대 점검 요소를 기준으로 검토해 주세요.\n  1. 법률유보 원칙: 「지방자치법」 제28조에 비추어 주민의 권리를 제한하거나 의무를 부과하는 조항이 있는지\n  2. 재정 지원 합법성: 예산 지원 조항이 「지방재정법」 제17조에 저촉될 위험과 수정 방향\n  3. 다른 지자체 사례: 관련 법적 분쟁 사례의 쟁점 요약\nConstraint: 존재하지 않는 조례나 판례를 지어내지 말 것 (모르면 '확인 필요'로 명시). 결론은 비전문가도 이해하도록 요약.", "ex": {}, "id": "p09"}, {"m": "조례", "t": "중급", "title": "신구조문대비표 자동 생성", "when": "기존 조례를 일부 개정할 때", "text": "Role: 꼼꼼하고 정확한 자치입법 전문 의회 수석 전문위원\nContext: [함양군 아동 밤길 안심귀가 조례]의 일부를 개정하려고 합니다.\nTask: 아래 [현행 조문]과 [개정 방향 및 사유]로 신구조문대비표를 작성하고, 상위법 위반 소지를 짧게 코멘트해 주세요.\n[현행 조문] 제3조(지원 대상): 초등학생 / 제5조(지원 내용): 귀가 동행 서비스 / 제7조(예산): 예산의 범위에서 지원한다.\n[개정 방향 및 사유] 제3조: 중학생 추가 / 제5조: 안심 귀가 앱 연계 추가 / 제7조: 지방재정법 제17조 저촉 방지를 위해 '일부 지원할 수 있다'로 변경\nFormat: 표 (열: 구분 | 현행 조문 | 개정안 | 개정 사유), 개정안에서 바뀐 단어는 굵게.", "ex": {}, "id": "p10"}, {"m": "조례", "t": "심화", "title": "실제 조례 3건 비교 · 맞춤 초안", "when": "ELIS에서 유사 조례를 찾은 뒤 — AI에게 찾게 하지 않고 원문을 넣어 줍니다", "text": "Role: 자치입법을 전문으로 하는 의회 수석 전문위원\nContext: 아래에 자치법규정보시스템(ELIS)에서 내려받은 [유사 조례 원문 3건]을 붙여 넣었습니다. 우리 군의 여건: [인구 · 빈집 현황 등 입력]\nTask: ① 3건을 \"목적 · 지원 대상 · 지원 내용 · 예산 조항 · 위원회 · 벌칙\" 기준으로 비교표 작성 ② 함양군 여건에 맞는 조례 초안 작성\nFormat: 초안의 각 조항 끝에 (참고: ○○군 조례 제○조)처럼 근거가 된 원문 위치를 표시할 것.\nConstraint: 붙여 넣은 원문 밖의 법령 · 판례 · 조례를 인용하지 말 것. 확신이 없으면 [확인 필요]. 벌칙 · 과태료 조항은 넣지 말고 \"검토 필요\"로만 표시.", "ex": {}, "id": "p11"}, {"m": "행정사무감사", "t": "기초", "title": "질문 뽑기", "when": "사업명과 의심 가는 점만 있을 때", "text": "함양군 [농촌 체험관광 활성화 사업]이 3년째 예산을 다 못 쓰고 있어. 행정사무감사에서 담당 과장에게 물어볼 질문 5개를 뽑아 줘. 쉬운 질문부터 날카로운 질문 순서로.", "ex": {"follow": ["\"각 질문에 공무원이 할 법한 답변도 달아 줘\"", "\"그 답변을 반박하려면 어떤 자료가 필요한지 적어 줘\"", "\"가장 중요한 질문 2개만 남기고 30초 안에 읽을 수 있게 다듬어 줘\""]}, "id": "p12"}, {"m": "행정사무감사", "t": "중급", "title": "질의 시나리오 + 자료요구서", "when": "이상징후를 발견한 사업을 집중 질의할 때", "text": "Role: 분석력이 뛰어난 다선 의원이자 행정사무감사 특별위원회 위원장\nContext: 함양군 [2025년도] 결산서를 분석한 결과, [청년 스마트팜 조성 사업]에서 2년 연속 명시이월이 발생했고 올해 불용률이 [○○%]에 달합니다.\nTask: 담당 국장 · 과장을 상대로 질의할 대본과 추가 자료요구서를 작성해 주세요.\nFormat: 1) 사전 자료요구 목록 — 과업지시서 · 검수조서 · 업체 선정 기준표 등 구체적 증빙서류 5가지  2) 질의 시나리오 3단계 — [도입] 객관적 수치 제시 / [압박] 예상 답변(\"행정 절차가 지연되었습니다\" 등)을 미리 차단하는 질문 / [마무리] 대안 촉구와 미조치 시 후속 조치 예고\nConstraint: 정중하지만 단호한 구어체. 감정적 비난 없이 '데이터와 절차'에 집중.", "ex": {}, "id": "p13"}, {"m": "행정사무감사", "t": "중급", "title": "3단계 꼬리물기 질의 시나리오 트리", "when": "질의 주도권을 쥐고 싶을 때", "text": "Role: 타협하지 않는 3선 지방의원\nContext: [함양군] 행정사무감사에서 담당 국장에게 [농촌 체험관광 활성화 사업의 최근 3년 불용률과 특정 단체 편중 지원] 문제를 지적하려고 합니다.\nTask: 주도권을 쥐고 질의할 수 있는 '3단계 꼬리물기 질의 시나리오 트리'를 표로 작성해 주세요.\nFormat: 단계 | 의원의 질의(반박) | 공무원의 예상 답변 | 반박할 데이터 · 자료 요구\n  1단계: 초기 문제 제기 → 1차 방어 논리 → 다른 지자체 데이터 등 객관적 반박\n  2단계: 1단계 반박에 이은 압박 → 2차 변명 → 법령 위반 소지나 세부 정산서 요구\n  3단계: 최종 경고와 대안 촉구 → 수용 · 개선 약속 → 사후 조치와 특정감사 예고\nConstraint: 공무원 답변은 현장에서 흔한 책임 회피성 발언(예산 부족, 규정 모호 등)으로 현실감 있게. 의원 반박은 데이터와 비교 사례에 기반한 논리로.", "ex": {}, "id": "p14"}, {"m": "행정사무감사", "t": "심화", "title": "데이터에서 질의서까지", "when": "결산 자료를 업로드할 수 있을 때 — 같은 대화창에서 4번 이어서 입력", "text": "Step 1: 업로드한 [함양군 결산 자료]에서 불용률 30% 이상이거나 2년 연속 이월된 사업을 표로 뽑아 줘. 계산식도 함께 보여 줘.\nStep 2: 그중 [1순위 사업]을 골라 \"사실 확인 → 원인 → 책임 → 대책\" 4단계 질의 시나리오를 써 줘. 예상 답변과 반박 근거를 함께.\nStep 3: 위 질의에 필요한 자료요구서를 써 줘. 과업지시서 · 검수조서 · 업체 선정 기준표 등 서류명 5가지와 제출 기한을 넣어.\nStep 4: 질의서에 나온 숫자를 표로 모으고 Step 1 결과표의 어느 행에서 왔는지 표시해 줘. 출처가 없으면 [확인 필요].\nConstraint: 감정적 호통이 아닌 데이터 기반 질의, 실명 · 개인정보 미포함.", "ex": {"warn": "업로드 전 개인정보 · 비공개 열을 삭제했는지 확인하세요. 의결 · 공개된 자료만 사용합니다."}, "id": "p15"}, {"m": "군정질문", "t": "기초", "title": "질문 요지 만들기", "when": "묻고 싶은 것이 한 줄로 있을 때", "text": "군수님께 [농공단지 가동률이 떨어진 이유와 대책]을 묻고 싶어. 군정질문 요지를 질문 3개로 정리해 줘. 질문마다 \"왜 묻는지\" 한 줄 설명도 붙여 줘.", "ex": {"follow": ["\"질문을 일문일답에 맞게 짧게 쪼개 줘\"", "\"군수님이 할 수 있는 답변을 예상해 줘\"", "\"마지막 질문은 언제까지 무엇을 할지 확답을 받는 형태로 바꿔 줘\""]}, "id": "p16"}, {"m": "군정질문", "t": "중급", "title": "질문서 + 예상 답변 + 보충질문", "when": "본회의 질문서 초안을 만들 때", "text": "Role: 군정질문 준비를 돕는 의회 정책지원관\nContext: [함양군 농공단지 가동률 하락과 기업 유치 실적]에 대한 일문일답 군정질문을 준비 중입니다. 근거 자료: [붙여 넣기]\nTask: 단계 · 의원 질문 · 예상 답변 · 보충질문 4열 표로 3단계(문제 제기 → 원인 추궁 → 대책 확답) 질문서를 작성해 줘.\nFormat: 질문은 한 문장 30자 안팎, 표 형식.\nConstraint: 근거 자료에 없는 수치는 쓰지 말 것. 인신공격성 표현 배제.", "ex": {}, "id": "p17"}, {"m": "군정질문", "t": "심화", "title": "AI 역할극 — 단체장과 일문일답 연습", "when": "본회의 전 실전 리허설 — AI가 군수 역할을 맡습니다", "text": "Role: 당신은 노련하고 방어적인 [함양군수]입니다. 저는 당신에게 군정질문을 하는 [군의원]입니다.\nContext: 오늘 군정질문의 핵심 주제는 [농공단지 가동률 하락과 기업 유치 실적]입니다.\nTask: 지금부터 저와 1:1 일문일답을 진행합니다.\n  1. 제가 의원으로서 질문하면, 당신은 군수 입장에서 답변하세요.\n  2. 답변은 '법령상 한계', '예산 부족', '종합적 검토' 같은 전형적인 회피 논리를 섞어 2~3문장으로 짧게 방어하세요.\n  3. 한 번에 전체 대본을 쓰지 말고, 제 질문을 기다렸다가 하나씩 답하세요.\n첫 질문: \"군수님, 취임 당시 약속하신 농공단지 가동률 목표와 현재 가동률을 말씀해 주십시오. 차이의 원인은 무엇입니까?\"", "ex": {"follow": ["\"방금 논쟁을 바탕으로 본회의장에서 읽을 마무리 발언을 써 줘. 30초 분량(공백 포함 200~250자), 책임 있는 대책을 촉구하고 군민에게 희망을 주는 어조로.\""], "followLabel": "대화가 끝난 뒤 이어서 입력"}, "id": "p18"}, {"m": "민원 응대", "t": "기초", "title": "답장 초안 받기", "when": "짧은 민원에 문자로 답할 때", "text": "아래 민원에 의원으로서 보낼 답장 문자를 써 줘. 따뜻하게, 하지만 지킬 수 없는 약속은 하지 말고 300자 안으로.\n\n[민원] 마을 앞 도로 가로등이 두 달째 꺼져 있어서 밤에 어르신들이 넘어질까 걱정입니다. (○○면 A마을 주민)", "ex": {"check": ["이름 · 전화번호 · 주소가 남아 있지 않은가", "'반드시 해결' 같은 확정 약속이 없는가", "다음 연락 시점이 들어 있는가"], "checkLabel": "보내기 전 30초 확인"}, "id": "p19"}, {"m": "민원 응대", "t": "중급", "title": "4단 공식 회신 — 불가능한 요구의 완곡한 거절", "when": "감정이 격한 민원, 법적으로 들어줄 수 없는 요구일 때", "text": "Role: 함양군의회의 10년 차 민원 소통 비서관. 공감 능력이 뛰어나면서도 법적 테두리를 명확히 지킵니다.\nContext: 아래에 군민이 작성한 [민원 원문]이 있습니다.\nTask: 원문을 분석해 의원이 민원인에게 직접 보낼 수 있는 정제된 답변 문자를 작성해 주세요.\n[민원 원문 붙여 넣기 — 실명 · 연락처 삭제 후]\nFormat: 표준 4단 공식 — 1) [공감] 1~2문장 2) [사실확인] 현재 법적 상황 · 한계 3) [처리절차] 의원실의 조치 4) [회신기한] [날짜]까지 경과를 알리겠다는 약속\nConstraint: 법적으로 불가능한 요구는 완곡하지만 분명하게 거절하고 대안을 제시할 것. 정중하고 신뢰감 있는 말투.", "ex": {}, "id": "p20"}, {"m": "민원 응대", "t": "심화", "title": "반복 민원 이력 정리 + 두 가지 회신", "when": "같은 민원이 여러 번 들어올 때", "text": "Role: 공감과 법적 한계를 함께 지키는 의회 민원 소통 비서관\nContext: 아래는 비식별 처리한 [같은 축사 악취 민원 5건의 접수 기록]과 [관련 법령 조문 원문]입니다.\nTask: ① 민원 이력을 날짜순 표로 요약 ② 붙여 넣은 조문 기준으로 군이 할 수 있는 조치와 할 수 없는 조치를 구분 ③ 민원인에게 보낼 문자용(300자)과 서면 회신문(1쪽) 작성\nFormat: 회신은 공감 → 사실확인 → 처리절차 → 회신기한 4단 공식.\nConstraint: 붙여 넣은 조문 밖의 법령 인용 금지, 확정되지 않은 처리 결과를 약속하지 말 것.", "ex": {}, "id": "p21"}, {"m": "스마트폰", "t": "기초", "title": "음성으로 리허설하기", "when": "이동 중 5분발언 · 군정질문 연습 — AI 앱의 음성 대화 기능을 켜고 말로 요청", "text": "지금부터 내가 [5분발언 원고]를 실제 속도로 읽을 거야. 다 읽으면 ① 걸린 시간 ② 말이 빨랐던 부분 ③ 어색한 문장 3개를 알려 줘.", "ex": {"followLabel": "이어서 말로 요청", "follow": ["\"지금부터 군수 역할로 내 질문에 짧게 방어해 줘\"", "\"방금 지적한 문장을 고친 버전으로 다시 읽어 줘\""]}, "id": "p22"}, {"m": "스마트폰", "t": "기초", "title": "카메라로 현장 기록하기", "when": "현장 사진 한 장을 민원 회신 · 행감 질의 소재로 바꿀 때 (사진 첨부 후 입력)", "text": "[첨부: 도로 파손 현장 사진] 이 사진은 [○○면 군도 ○호선] 현장이야.\n① 사진에서 보이는 위험 요소를 3가지로 정리하고 ② 군청 담당 부서에 보낼 개선 요청 메모와 ③ 다음 행정사무감사 질문 1개를 만들어 줘.", "ex": {}, "id": "p23"}, {"m": "스마트폰", "t": "기초", "title": "현장 민원 1분 응대", "when": "받아쓰기 → 비식별 → 문자 초안 → 확인 후 발송. 메모 앱에 저장해 두고 쓰세요", "text": "아래 민원에 4단 공식(공감 · 사실확인 · 처리절차 · 회신기한)으로 300자 문자 답장을 써 줘. 지킬 수 없는 약속은 빼고, 다음 연락 날짜는 [날짜]로 비워 둬.\n[민원 내용 붙여 넣기 — 이름 · 번호 · 주소 삭제 후]", "ex": {}, "id": "p24"}, {"m": "조례 검증", "t": "기초", "title": "재현 실습 — AI 오류를 직접 확인하기", "when": "교육 · 연습용. 답변을 law.go.kr 현행 법령과 대조합니다", "text": "지방자치단체가 조례를 제정할 수 있는 근거 조문과, 주민의 권리를 제한하거나 의무를 부과하는 조례를 만들 때의 요건을 조문 번호와 함께 알려 줘.", "ex": {"check": ["근거 조문을 몇 조로 답했는가? → 현행 「지방자치법」은 제28조", "'법률의 위임'이 필요하다는 단서를 설명했는가?", "조례 위반 과태료(제34조)를 언급했다면 한도를 원문과 대조했는가?"]}, "id": "p25"}, {"m": "조례 검증", "t": "심화", "title": "1단계 근거 제한 — 원문 안에서만 답하게", "when": "법령은 law.go.kr, 조례는 elis.go.kr에서 현행 원문을 복사해 함께 넣습니다", "text": "Role: 자치입법 검토를 돕는 의회 전문위원\nContext: [원문 A]는 국가법령정보센터에서 복사한 「지방자치법」 제28조 원문, [원문 B]는 ELIS에서 복사한 [유사 조례] 원문, [조례안]은 검토할 초안입니다.\nTask: [조례안]이 [원문 A]의 요건을 지키는지 조항별로 검토해 줘.\nFormat: 조항 | 판단(적합 · 검토 필요) | 근거가 된 원문 문장(그대로 인용) 표\nConstraint: 붙여 넣은 원문 밖의 법령 · 판례 · 조례는 인용하지 말 것. 원문에서 근거를 찾을 수 없으면 판단하지 말고 [확인 필요]로 표시.", "ex": {}, "id": "p26"}, {"m": "조례 검증", "t": "중급", "title": "2단계 자기검증 — 인용한 근거를 표로 다시 꺼내기", "when": "답변을 받은 직후, 같은 대화창에서 이어서 입력", "text": "방금 답변에서 인용한 모든 법령 · 조례 · 판례를 표로 정리해 줘.\n열: 근거 이름 | 조문 · 사건번호 | 원문 문구(그대로) | 확신도(높음 · 중간 · 낮음) | 내가 확인할 곳\n원문 문구를 그대로 적을 수 없는 항목은 확신도를 '낮음'으로 하고, 그 이유를 한 줄로 적어 줘.", "ex": {"warn": "확신도 '낮음' 항목부터 4단계에서 확인합니다. AI가 '높음'이라고 적어도 그대로 믿지 않습니다."}, "id": "p27"}, {"m": "조례 검증", "t": "심화", "title": "3단계 교차검증 — 다른 AI에게 반박 맡기기", "when": "가능하면 다른 회사의 AI 대화창에 입력", "text": "Role: 조례안의 법적 문제를 찾아내는 깐깐한 반대 측 검토자\nContext: 아래는 다른 AI가 작성한 [조례안 검토 의견]입니다.\nTask: ① 사실과 다를 수 있는 법령 인용 ② 근거 없이 단정한 부분 ③ 빠진 검토 사항을 각각 찾아 줘.\nFormat: 지적 사항 | 이유 | 확인 방법 표\nConstraint: 반박할 근거가 없으면 '문제 없음'이라고 솔직히 쓸 것.", "ex": {"check": ["같은 답 → 그래도 4단계에서 원문 확인", "다른 답 → 그 부분이 1순위 확인 대상", "둘 다 모름 → 전문가에게"]}, "id": "p28"}, {"m": "지방재정365", "t": "기초", "title": "함양군 재정 프로필 해설", "when": "5분발언 · 의정보고서에 재정지표를 쓸 때 — 지표 표를 복사해 붙여 넣습니다", "text": "Role: 지방재정을 쉽게 설명하는 의회 정책지원관\nContext: 아래는 지방재정365에서 복사한 [함양군 최근 3년 재정자립도 · 재정자주도]와 [같은 유형 군 평균]입니다. [표 붙여 넣기]\nTask: ① 주민이 이해할 수 있게 3문장으로 해설 ② 5분발언에 쓸 수 있는 문장 2개 ③ 이 숫자만으로는 말할 수 없는 것 2가지\nConstraint: 붙여 넣은 표 밖의 숫자를 쓰지 말 것. 문장마다 지표의 기준 연도를 밝힐 것.", "ex": {}, "id": "p29"}, {"m": "지방재정365", "t": "중급", "title": "사업별 집행 현황으로 저집행 사업 찾기", "when": "행정사무감사 전 — 내려받은 집행 현황 파일을 업로드합니다 (10장 전처리 참고)", "text": "Role: 행정사무감사를 준비하는 의회 데이터 분석관\nContext: 업로드한 파일은 지방재정365에서 내려받은 [함양군 사업별 세출 집행 현황, 기준일 ○월 ○일]입니다.\nTask: ① 예산현액 대비 집행률이 낮은 사업 10개 표 ② 남은 기간을 고려해 불용 가능성이 큰 사업 3개와 이유 ③ 사업마다 담당 부서에 물을 질문 1개\nFormat: 계산식과 기준일을 표 아래에 밝힐 것.\nConstraint: 연도 중 집행률은 사업 특성(연말 집중 집행 등)에 따라 낮을 수 있으니 '의심'과 '확정'을 구분해 쓸 것.", "ex": {}, "id": "p30"}, {"m": "지방재정365", "t": "심화", "title": "다른 군과 비교해 질의 근거 만들기", "when": "\"다른 군은 했는데 왜 우리는?\" — 숫자와 출처가 남는 질문을 만들 때", "text": "Role: 비교 분석에 능한 의회 정책지원관\nContext: 아래는 지방재정365에서 복사한 [함양군과 비교 대상 군 ○곳의 같은 지표, ○○년 결산 기준]입니다.\nTask: ① 함양군의 위치를 순위와 평균 대비 차이로 설명 ② 차이가 가장 큰 항목 2개 ③ 집행부에 물을 질문 3개 (출처 문장 포함)\nFormat: 표 1개 + 질문 목록\nConstraint: 붙여 넣은 수치만 사용. 다른 군을 평가 · 비방하는 표현 금지. 차이의 원인은 단정하지 말고 '확인할 점'으로 쓸 것.", "ex": {"check": ["**같은 유형끼리** — 인구 · 재정 규모가 비슷한 군과 비교", "**같은 기준으로** — 같은 회계연도 · 같은 지표 정의", "**출처를 말로** — '지방재정365 ○○년 결산 기준'을 질의에 넣기"], "checkLabel": "비교 질의 3원칙"}, "id": "p31"}, {"m": "데이터 분석", "t": "중급", "title": "셀 병합 해제 자동화 (VBA)", "when": "결산서 엑셀의 병합 셀 때문에 분석이 안 될 때 — 코드를 받은 뒤 직접 엑셀에서 실행합니다", "text": "Role: 엑셀 매크로(VBA)와 업무 자동화 전문가\nTask: 관공서 결산서 파일의 데이터 전처리를 위한 VBA 코드를 작성해 줘.\nContext: 엑셀 표의 [A열부터 F열]까지 셀 병합이 되어 있어 피벗 테이블이나 AI 분석을 할 수 없어.\nFormat: 1) 드래그로 선택한 영역의 셀 병합을 모두 해제 2) 해제되면서 생긴 빈칸에는 바로 위 셀 값을 복사해 채우기 3) 엑셀에 적용 · 실행하는 방법(Alt+F11 등)을 초보자 눈높이에서 3단계로 설명", "ex": {}, "id": "p32"}, {"m": "데이터 분석", "t": "중급", "title": "감사 대상 추출용 엑셀 수식", "when": "수식을 외우지 않고 원하는 사업을 바로 걸러 낼 때", "text": "Role: 데이터 분석에 능통한 의회 수석 전문위원\nContext: 행정사무감사를 위해 결산서 엑셀을 분석 중입니다. 열 구조: A 소관 부서 / B 세부 사업명 / C 예산현액 / D 지출액 / E 불용액 / F 집행률(%)\nTask: 다음 두 가지를 추출하는 MS Excel 수식을 작성하고 간단히 설명해 주세요.\n  1. 조건부 합계: [농업기술센터](A열) 소관 사업의 불용액(E열) 합계 (SUMIFS)\n  2. 하위 추출: 집행률(F열)이 가장 낮은 5개 사업의 사업명(B열)과 집행률 (Microsoft 365 기준 FILTER · SORT 등 동적 배열 함수)", "ex": {}, "id": "p33"}, {"m": "데이터 분석", "t": "심화", "title": "이상징후 자동 탐색 마스터 프롬프트", "when": "전처리가 끝난 결산 · 수의계약 파일을 업로드하고 한 번에 종합 진단을 받을 때", "text": "Role: 예산 낭비를 적발하는 지방의회 수석 데이터 분석관\nContext: 업로드한 파일은 우리 군의 [2025년도] 결산서와 수의계약 내역 엑셀 데이터입니다. (파일에 한글이 포함되어 있으니 인코딩에 유의)\nTask: 다음 3대 이상징후에 해당하는 사업과 업체를 찾아 종합 보고서를 작성해 주세요.\n  1. [예산 과다 · 부실] 예산현액 대비 지출액으로 불용률 30% 이상 사업 명단\n  2. [특혜 의혹] 계약금액 1천만 원 이상 수의계약을 단일 업체가 연간 5회 이상 수주한 사례 (파이 차트로도 제공)\n  3. [예산 낭비] 집행률은 100%에 가까우나 성과지표 달성도가 50% 미만인 사업\nFormat: 항목별 사업명(업체명)과 정확한 수치를 표로 정리. 데이터 구조상 계산이 불가능한 항목은 어떤 열이 더 필요한지 알려 줄 것.", "ex": {"warn": "의결 · 공개된 결산서만 업로드하고, 주민등록번호 · 계좌번호 등 민감정보를 삭제했는지 최종 점검하세요. 업체명이 나오는 결과는 의혹이 아닌 확인 대상으로 다룹니다."}, "id": "p34"}, {"m": "데이터 분석", "t": "심화", "title": "주민 보고용 이중축 차트", "when": "의정보고서 · 주민 설명회용 차트를 만들 때", "text": "Role: 공공기관 데이터 시각화 · 대시보드 디자인 전문가\nContext: 추출된 예결산 데이터로 주민 의정보고서에 들어갈 [부서별 집행 현황] 차트를 만들려고 합니다.\nTask: 1) 제공된 데이터로 이중축 혼합 차트를 그려 주세요 — 막대(왼쪽 축, 0~100): 부서별 집행률 / 꺾은선(오른쪽 축, %): 부서별 불용률, 마커 표시  2) 엑셀에서 같은 차트를 직접 만드는 마우스 클릭 순서를 5단계로 설명해 주세요.\nConstraint: 스마트폰에서도 잘 보이도록 제목 · 축 이름 · 범례 글꼴을 크게. 배경 눈금선은 최소화.", "ex": {}, "id": "p35"}];
+const MODS = ['전체', '5분발언', '보도자료', '조례', '행정사무감사', '군정질문', '민원 응대', '스마트폰', '조례 검증', '지방재정365', '데이터 분석'];
+const HASH = { all: '전체', basic: '기초', mid: '중급', adv: '심화' };
+const HASH_OF = { '전체': 'all', '기초': 'basic', '중급': 'mid', '심화': 'adv' };
+const state = { tier: '전체', mod: '전체', q: '' };
+
+try { const s = localStorage.getItem('pb-tier'); if (s && HASH_OF[s]) state.tier = s; } catch (e) {}
+const h = (location.hash || '').slice(1);
+if (HASH[h]) state.tier = HASH[h];
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function fmt(text) {
+  return text.split('\n').map(line => {
+    let out = esc(line).replace(/\[[^\]]+\]/g, m => `<span class="ph">${m}</span>`);
+    out = out.replace(/^(\s*)(Role|Context|Task|Format|Constraint|Step \d)(:)/, '$1<span class="lb">$2:</span>');
+    return out;
+  }).join('\n');
+}
+const strip = s => s.replace(/\*\*/g, '');
+function exHTML(ex) {
+  const parts = [];
+  if (ex.follow) parts.push(`<h4>${esc(ex.followLabel || '이어 말하기')}</h4><ul>${ex.follow.map(f => `<li>${esc(strip(f))}</li>`).join('')}</ul>`);
+  if (ex.check) parts.push(`<h4>${esc(ex.checkLabel || '확인할 점')}</h4><ul>${ex.check.map(f => `<li>${esc(strip(f))}</li>`).join('')}</ul>`);
+  if (ex.warn) parts.push(`<p class="warn"><b>주의</b> ${esc(ex.warn)}</p>`);
+  return parts.length ? `<details><summary>이어 말하기 · 확인할 점</summary><div class="ex">${parts.join('')}</div></details>` : '';
+}
+
+const list = document.getElementById('list');
+list.innerHTML = DATA.map(p => `
+  <article class="card" id="${p.id}" data-t="${p.t}" data-m="${esc(p.m)}">
+    <div class="meta"><span class="pill ${p.t}">${p.t}</span><span>${esc(p.m)}</span></div>
+    <h3>${esc(p.title)}</h3>
+    ${p.when ? `<p class="when">${esc(p.when)}</p>` : ''}
+    <pre class="prompt">${fmt(p.text)}</pre>
+    <div class="actions"><button type="button" class="copy" data-id="${p.id}">복사하기</button></div>
+    <p class="hint" hidden>복사가 막혀 있어 문장을 선택했습니다. 길게 눌러 복사하세요.</p>
+    ${exHTML(p.ex || {})}
+  </article>`).join('');
+
+const modBox = document.getElementById('mods');
+modBox.innerHTML = MODS.map(m => `<button type="button" data-m="${m}">${m}</button>`).join('');
+
+function render() {
+  const q = state.q.trim();
+  let shown = 0;
+  const counts = { '전체': 0, '기초': 0, '중급': 0, '심화': 0 };
+  DATA.forEach(p => {
+    const el = document.getElementById(p.id);
+    const modOk = state.mod === '전체' || p.m === state.mod;
+    const qOk = !q || (p.title + p.text + p.m + (p.when || '')).includes(q);
+    if (modOk && qOk) { counts['전체']++; counts[p.t]++; }
+    const ok = modOk && qOk && (state.tier === '전체' || p.t === state.tier);
+    el.hidden = !ok;
+    if (ok) shown++;
+  });
+  document.querySelectorAll('.tiers button').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.t === state.tier));
+    b.querySelector('small').textContent = counts[b.dataset.t] + '개';
+  });
+  modBox.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === state.mod)));
+  document.getElementById('count').textContent = shown ? `${state.tier} · ${state.mod} — 프롬프트 ${shown}개` : '';
+  let empty = document.getElementById('empty');
+  if (!shown) {
+    if (!empty) { empty = document.createElement('p'); empty.id = 'empty'; empty.className = 'empty'; list.after(empty); }
+    empty.textContent = '조건에 맞는 프롬프트가 없습니다. 단계나 모듈을 바꿔 보세요.';
+    empty.hidden = false;
+  } else if (empty) empty.hidden = true;
+}
+
+document.querySelector('.tiers').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.tier = b.dataset.t;
+  try { localStorage.setItem('pb-tier', state.tier); } catch (err) {}
+  try { history.replaceState(null, '', '#' + HASH_OF[state.tier]); } catch (err) {}
+  render();
+});
+modBox.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.mod = b.dataset.m; render();
+});
+document.getElementById('q').addEventListener('input', e => { state.q = e.target.value; render(); });
+
+list.addEventListener('click', e => {
+  const b = e.target.closest('.copy'); if (!b) return;
+  const p = DATA.find(x => x.id === b.dataset.id);
+  const card = b.closest('.card');
+  const done = () => {
+    card.classList.add('copied'); b.textContent = '복사됨 — AI 앱에 붙여 넣으세요';
+    clearTimeout(card._t);
+    card._t = setTimeout(() => { card.classList.remove('copied'); b.textContent = '복사하기'; }, 2600);
+  };
+  const fallback = () => {
+    const pre = card.querySelector('.prompt');
+    const r = document.createRange(); r.selectNodeContents(pre);
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    card.querySelector('.hint').hidden = false;
+  };
+  try {
+    navigator.clipboard.writeText(p.text).then(done, fallback);
+  } catch (err) { fallback(); }
+});
+
+render();
+</script>
